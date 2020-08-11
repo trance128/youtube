@@ -1,9 +1,5 @@
-// Welcome Again to the Complete (FREE) Flutter Course
-// Presented by, Ovidius Mazuru
-
 import 'package:flutter/material.dart';
-
-import 'screens/home_screen.dart';
+import 'package:flutter_timer/screens/home_screen_finished.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +19,8 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
           subtitle2: TextStyle(
+            color: Colors.white,
             fontSize: 14,
-            fontWeight: FontWeight.w600,
           ),
         ),
       ),

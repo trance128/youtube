@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _screenIndex = 0;
 
-  _setIndex(index) {
+  void setIndex(index) {
     setState(() {
       _screenIndex = index;
     });
@@ -19,74 +19,73 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> screens = [
       Center(
         child:
-            Text('First screen', style: Theme.of(context).textTheme.headline1),
+            Text('First Screen', style: Theme.of(context).textTheme.headline1),
       ),
       Center(
         child:
-            Text('Second screen', style: Theme.of(context).textTheme.headline1),
+            Text('Second Screen', style: Theme.of(context).textTheme.headline1),
       ),
       Center(
         child:
-            Text('Third screen', style: Theme.of(context).textTheme.headline1),
+            Text('Third Screen', style: Theme.of(context).textTheme.headline1),
       ),
     ];
 
     return Scaffold(
       body: screens[_screenIndex],
-      bottomNavigationBar: _BottomNav(_screenIndex, _setIndex),
+      bottomNavigationBar:
+          BottomNavBar(index: _screenIndex, callback: setIndex),
     );
   }
 }
 
-class _BottomNav extends StatefulWidget {
+class BottomNavBar extends StatefulWidget {
   final int index;
   final Function callback;
 
-  const _BottomNav(this.index, this.callback) : super();
+  const BottomNavBar({
+    Key key,
+    this.index,
+    this.callback,
+  }) : super(key: key);
 
   @override
-  __BottomNavState createState() => __BottomNavState();
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class __BottomNavState extends State<_BottomNav> {
+class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
+    _BuildNavBarItem(Icon icon, String title) {
+      return BottomNavigationBarItem(
+        icon: Padding(padding: const EdgeInsets.all(10), child: icon),
+        title: Text(title),
+      );
+    }
+
     return BottomNavigationBar(
-        currentIndex: widget.index,
         elevation: 0,
-        selectedItemColor: Theme.of(context).primaryColor,
+        currentIndex: widget.index,
+        unselectedFontSize: 14,
+        selectedFontSize: 14,
         unselectedItemColor: Theme.of(context).accentColor,
         backgroundColor: Theme.of(context).backgroundColor,
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
         items: <BottomNavigationBarItem>[
-          _buildNavItem(
+          _BuildNavBarItem(
             Icon(Icons.timer),
             'Stopwatch',
           ),
-          _buildNavItem(
+          _BuildNavBarItem(
             Icon(Icons.slow_motion_video),
             'Timer',
           ),
-          _buildNavItem(
+          _BuildNavBarItem(
             Icon(Icons.settings),
             'Settings',
           ),
         ],
-        onTap: (index) {
-          widget.callback(index);
+        onTap: (ind) {
+          widget.callback(ind);
         });
   }
-}
-
-_buildNavItem(Icon icon, String title) {
-  return BottomNavigationBarItem(
-    icon: Padding(
-      padding: const EdgeInsets.all(10),
-      child: icon,
-    ),
-    title: Text(
-      title,
-    ),
-  );
 }

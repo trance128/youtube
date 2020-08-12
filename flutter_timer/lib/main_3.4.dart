@@ -41,20 +41,6 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      routes: {
-        StopwatchScreen.routeName: (context) => StopwatchScreen(
-              screenIndex: _screenIndex,
-              setIndexCallback: setIndex,
-            ),
-        TimerScreen.routeName: (context) => TimerScreen(
-              screenIndex: _screenIndex,
-              setIndexCallback: setIndex,
-            ),
-        OptionsScreen.routeName: (context) => OptionsScreen(
-              screenIndex: _screenIndex,
-              setIndexCallback: setIndex,
-            ),
-      },
       home: StopwatchScreen(
         screenIndex: _screenIndex,
         setIndexCallback: setIndex,

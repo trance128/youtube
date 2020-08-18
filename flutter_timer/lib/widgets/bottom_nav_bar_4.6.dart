@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import '../screens/options_screen.dart';
 import '../screens/stopwatch_screen.dart';
 import '../screens/timer_screen.dart';
-import '../state/nav_bar_state.dart';
 
 class BottomNavBar extends StatefulWidget {
+  final int index;
+  final Function callback;
+
   const BottomNavBar({
     Key key,
+    this.index,
+    this.callback,
   }) : super(key: key);
 
   @override
@@ -15,15 +19,6 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int index;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    NavBarStateState data = NavBarState.of(context);
-    index = data.index;
-  }
-
   @override
   Widget build(BuildContext context) {
     _BuildNavBarItem(Icon icon, String title) {
@@ -35,7 +30,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
     return BottomNavigationBar(
       elevation: 0,
-      currentIndex: index,
+      currentIndex: widget.index,
       unselectedFontSize: 14,
       selectedFontSize: 14,
       unselectedItemColor: Theme.of(context).accentColor,
@@ -55,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ],
       onTap: (ind) {
-        NavBarState.of(context).setIndex(ind);
+        widget.callback(ind);
 
         switch (ind) {
           case 0:
@@ -69,7 +64,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
             // Navigator.of(context).pushReplacementNamed(OptionsScreen.routeName);
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => OptionsScreen(),
+                builder: (context) => OptionsScreen(
+                    screenIndex: ind, setIndexCallback: widget.callback),
               ),
             );
             break;

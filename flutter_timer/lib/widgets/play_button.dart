@@ -7,14 +7,12 @@ class PlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Icon(
-          Icons.play_circle_outline,
-          size: 200,
-          color: Theme.of(context).primaryColor,
-        ),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Icon(
+        Icons.play_circle_outline,
+        size: 200,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

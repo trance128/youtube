@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'custom_button.dart';
 
-class PlayButton extends StatelessWidget {
+class PauseButton extends StatelessWidget {
   final Function onPressed;
   final double size;
 
-  const PlayButton({
+  const PauseButton({
     Key key,
     @required this.onPressed,
     @required this.size,
@@ -17,7 +17,7 @@ class PlayButton extends StatelessWidget {
     return CustomButton(
       onPressed: onPressed,
       size: size,
-      icon: Icons.play_circle_outline,
+      icon: Icons.pause_circle_outline,
     );
   }
 }

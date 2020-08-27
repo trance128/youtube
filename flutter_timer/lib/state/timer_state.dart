@@ -10,6 +10,7 @@ class TimerState extends GetxController {
   // doing the same thing
   var displayString = RxString("25.00");
   var isRunning = RxBool(false);
+  var isStarted = Rx<bool>(false);
 
   var startMinChanged = false.obs;
   var startSecChanged = false.obs;
@@ -20,16 +21,20 @@ class TimerState extends GetxController {
   void start() {
     print("Starting timer");
     if (!_tsw.isRunning) {
+      print("I'm in the if statement");
       displayString.value = updateDisplayString();
       _tsw.start();
       periodicUpdateDisplayString();
       isRunning.value = true;
+      isStarted.value = true;
     }
   }
 
   void pause() {
     if (_tsw.isRunning) {
       _tsw.stop();
+      t.cancel();
+      isRunning.value = false;
     }
   }
 
@@ -37,17 +42,23 @@ class TimerState extends GetxController {
     if (!_tsw.isRunning) {
       _tsw.start();
       // perdioc function
+      periodicUpdateDisplayString();
+      isRunning.value = true;
     }
   }
 
   void reset() {
+    _tsw.stop();
     _tsw.reset();
     // stop periodic function
+    t.cancel();
+    isRunning.value = false;
+    isStarted.value = false;
   }
 
   void periodicUpdateDisplayString() {
     print("Starting periodic update");
-    Timer.periodic(Duration(seconds: 1), (t) {
+    t = Timer.periodic(Duration(seconds: 1), (t) {
       displayString.value = updateDisplayString();
       print(displayString.value);
     });
@@ -69,5 +80,11 @@ class TimerState extends GetxController {
     // value we set
     str += "${((startSec - _tsw.elapsed.inSeconds) % 60).toString().padLeft(2, "0")}";
     return str;
+  }
+
+  void dispose() {
+    t.cancel();
+    minutesInputController.value.dispose();
+    secondsInputController.value.dispose();
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_timer/state/timer_state.dart';
-import 'package:flutter_timer/widgets/play_button.dart';
 import 'package:get/get.dart';
 
+import '../state/timer_state.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/play_button.dart';
+import '../widgets/timer_running_with_bottom_button.dart';
 
 class TimerScreen extends StatelessWidget {
   static const routeName = "/timer-screen";
@@ -13,15 +15,16 @@ class TimerScreen extends StatelessWidget {
     final TimerState state = Get.put(TimerState());
 
     return Scaffold(
+      appBar: buildAppBar(context: context, reset: state.reset),
       body: Obx(() {
-        if (!state.isRunning.value) {
+        if (!state.isStarted.value) {
           return Column(
             children: [
               Expanded(
                 flex: 3,
                 child: Container(
                   alignment: Alignment.bottomCenter,
-                  child: PlayButton(onPressed: state.start),
+                  child: PlayButton(onPressed: state.start, size: 200),
                 ),
               ),
               Expanded(
@@ -41,7 +44,7 @@ class TimerScreen extends StatelessWidget {
                               textAlign: TextAlign.end,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1
+                                  .headline2
                                   .copyWith(
                                     color: Theme.of(context).accentColor,
                                   ),
@@ -52,7 +55,7 @@ class TimerScreen extends StatelessWidget {
                           ),
                           child: Text(
                             ':',
-                            style: Theme.of(context).textTheme.headline1,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         ),
                         Container(
@@ -64,7 +67,7 @@ class TimerScreen extends StatelessWidget {
                               maxLength: 2,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1
+                                  .headline2
                                   .copyWith(
                                     color: Theme.of(context).accentColor,
                                   ),
@@ -75,9 +78,11 @@ class TimerScreen extends StatelessWidget {
             ],
           );
         } else {
-          return Center(
-            child: Text(state.displayString.value,
-                style: Theme.of(context).textTheme.headline1),
+          return TimerRunningWithBottomButton(
+            displayString: state.displayString.value,
+            isRunning: state.isRunning.value,
+            pauseFunc: state.pause,
+            unpauseFunc: state.unpause,
           );
         }
       }),

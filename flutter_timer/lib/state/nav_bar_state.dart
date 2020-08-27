@@ -15,7 +15,7 @@ class NavBarState extends StatefulWidget {
 }
 
 class NavBarStateState extends State<NavBarState> {
-  int _index = 1;
+  int _index = 0;
 
   int get index => _index;
 

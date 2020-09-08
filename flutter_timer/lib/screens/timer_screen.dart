@@ -17,7 +17,28 @@ class TimerScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(context: context, reset: state.reset),
       body: Obx(() {
-        if (!state.isStarted.value) {
+        if (state.isTimerFinished.value) {
+          return Column(
+            children: [
+              Expanded(
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    state.displayString.value,
+                    style: Theme.of(context).textTheme.headline1.copyWith(
+                          color: state.showErrorColor.value
+                              ? Theme.of(context).primaryColor
+                              : Theme.of(context).errorColor,
+                        ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+            ],
+          );
+        } else if (!state.isStarted.value) {
           return Column(
             children: [
               Expanded(

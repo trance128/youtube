@@ -40,6 +40,9 @@ class StopwatchProvider with ChangeNotifier {
     _sw.stop();
     _sw.reset();
     t.cancel();
+    _isStarted = false;
+    _returnString = "00:00";
+    notifyListeners();
   }
 
   void updateSWString() {

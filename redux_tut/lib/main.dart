@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_tut/redux/reducers.dart';
-import 'package:redux_tut/redux/store.dart';
 
+import 'redux/middleware.dart';
+import 'redux/reducers.dart';
+import 'redux/store.dart';
 import 'screens/home_screen.dart';
 
 void main() {
   Store<AppState> _store =
-      Store<AppState>(reducers, initialState: AppState.initial());
+      Store<AppState>(reducers, initialState: AppState.initial(), middleware: [appStateMiddleware]);
 
   runApp(MyApp(store: _store));
 }

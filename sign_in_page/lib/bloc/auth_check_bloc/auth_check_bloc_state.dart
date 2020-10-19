@@ -1,6 +1,10 @@
-part of 'auth_check_bloc_bloc.dart';
+part of 'auth_check_bloc.dart';
 
 @immutable
-abstract class AuthCheckBlocState {}
+abstract class AuthCheckState {}
 
-class AuthCheckBlocInitial extends AuthCheckBlocState {}
+class AuthStateInitial extends AuthCheckState {}
+
+class AuthStateAuthenticated extends AuthCheckState {}
+
+class AuthStateUnauthenticated extends AuthCheckState {}

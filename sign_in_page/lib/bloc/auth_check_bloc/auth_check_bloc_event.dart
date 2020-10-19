@@ -1,4 +1,6 @@
-part of 'auth_check_bloc_bloc.dart';
+part of 'auth_check_bloc.dart';
 
 @immutable
-abstract class AuthCheckBlocEvent {}
+abstract class AuthCheckEvent {}
+
+class AuthEventAuthRequested extends AuthCheckEvent {}

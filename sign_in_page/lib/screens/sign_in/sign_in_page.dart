@@ -8,7 +8,7 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text(
+          const Text(
             'Sign In',
             style: TextStyle(
               fontSize: 20,
@@ -16,7 +16,7 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          TextField(
+          const TextField(
             decoration: InputDecoration(
               hintText: 'Email',
             ),
@@ -24,7 +24,7 @@ class SignInScreen extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(height: 10),
-          TextField(
+          const TextField(
             decoration: InputDecoration(
               hintText: 'Password',
             ),
@@ -35,7 +35,7 @@ class SignInScreen extends StatelessWidget {
           FlatButton(
             color: Colors.indigo.shade700,
             onPressed: () {},
-            child: Text('Sign In'),
+            child: const Text('Sign In'),
           ),
         ],
       ),

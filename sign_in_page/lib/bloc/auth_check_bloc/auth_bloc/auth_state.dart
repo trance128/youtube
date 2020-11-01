@@ -8,6 +8,7 @@ abstract class AuthState with _$AuthState {
     @required String confirmation,
     @required bool showConfirmation,
     @required String errorMessage,
+    @required int authStateChanged,
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(
@@ -15,6 +16,7 @@ abstract class AuthState with _$AuthState {
     password: '',
     confirmation: '',
     showConfirmation: false,
-    errorMessage: '',
+    errorMessage: '\n',
+    authStateChanged: 0,
   );
 }

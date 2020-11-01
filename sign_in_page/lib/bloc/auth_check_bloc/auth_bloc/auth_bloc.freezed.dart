@@ -885,13 +885,15 @@ class _$AuthStateTearOff {
       @required String password,
       @required String confirmation,
       @required bool showConfirmation,
-      @required String errorMessage}) {
+      @required String errorMessage,
+      @required int authStateChanged}) {
     return _AuthState(
       emailAddress: emailAddress,
       password: password,
       confirmation: confirmation,
       showConfirmation: showConfirmation,
       errorMessage: errorMessage,
+      authStateChanged: authStateChanged,
     );
   }
 }
@@ -907,6 +909,7 @@ mixin _$AuthState {
   String get confirmation;
   bool get showConfirmation;
   String get errorMessage;
+  int get authStateChanged;
 
   $AuthStateCopyWith<AuthState> get copyWith;
 }
@@ -920,7 +923,8 @@ abstract class $AuthStateCopyWith<$Res> {
       String password,
       String confirmation,
       bool showConfirmation,
-      String errorMessage});
+      String errorMessage,
+      int authStateChanged});
 }
 
 /// @nodoc
@@ -938,6 +942,7 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
     Object confirmation = freezed,
     Object showConfirmation = freezed,
     Object errorMessage = freezed,
+    Object authStateChanged = freezed,
   }) {
     return _then(_value.copyWith(
       emailAddress: emailAddress == freezed
@@ -953,6 +958,9 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage as String,
+      authStateChanged: authStateChanged == freezed
+          ? _value.authStateChanged
+          : authStateChanged as int,
     ));
   }
 }
@@ -968,7 +976,8 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       String password,
       String confirmation,
       bool showConfirmation,
-      String errorMessage});
+      String errorMessage,
+      int authStateChanged});
 }
 
 /// @nodoc
@@ -987,6 +996,7 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     Object confirmation = freezed,
     Object showConfirmation = freezed,
     Object errorMessage = freezed,
+    Object authStateChanged = freezed,
   }) {
     return _then(_AuthState(
       emailAddress: emailAddress == freezed
@@ -1002,6 +1012,9 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage as String,
+      authStateChanged: authStateChanged == freezed
+          ? _value.authStateChanged
+          : authStateChanged as int,
     ));
   }
 }
@@ -1013,12 +1026,14 @@ class _$_AuthState implements _AuthState {
       @required this.password,
       @required this.confirmation,
       @required this.showConfirmation,
-      @required this.errorMessage})
+      @required this.errorMessage,
+      @required this.authStateChanged})
       : assert(emailAddress != null),
         assert(password != null),
         assert(confirmation != null),
         assert(showConfirmation != null),
-        assert(errorMessage != null);
+        assert(errorMessage != null),
+        assert(authStateChanged != null);
 
   @override
   final String emailAddress;
@@ -1030,10 +1045,12 @@ class _$_AuthState implements _AuthState {
   final bool showConfirmation;
   @override
   final String errorMessage;
+  @override
+  final int authStateChanged;
 
   @override
   String toString() {
-    return 'AuthState(emailAddress: $emailAddress, password: $password, confirmation: $confirmation, showConfirmation: $showConfirmation, errorMessage: $errorMessage)';
+    return 'AuthState(emailAddress: $emailAddress, password: $password, confirmation: $confirmation, showConfirmation: $showConfirmation, errorMessage: $errorMessage, authStateChanged: $authStateChanged)';
   }
 
   @override
@@ -1054,7 +1071,10 @@ class _$_AuthState implements _AuthState {
                     .equals(other.showConfirmation, showConfirmation)) &&
             (identical(other.errorMessage, errorMessage) ||
                 const DeepCollectionEquality()
-                    .equals(other.errorMessage, errorMessage)));
+                    .equals(other.errorMessage, errorMessage)) &&
+            (identical(other.authStateChanged, authStateChanged) ||
+                const DeepCollectionEquality()
+                    .equals(other.authStateChanged, authStateChanged)));
   }
 
   @override
@@ -1064,7 +1084,8 @@ class _$_AuthState implements _AuthState {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(confirmation) ^
       const DeepCollectionEquality().hash(showConfirmation) ^
-      const DeepCollectionEquality().hash(errorMessage);
+      const DeepCollectionEquality().hash(errorMessage) ^
+      const DeepCollectionEquality().hash(authStateChanged);
 
   @override
   _$AuthStateCopyWith<_AuthState> get copyWith =>
@@ -1077,7 +1098,8 @@ abstract class _AuthState implements AuthState {
       @required String password,
       @required String confirmation,
       @required bool showConfirmation,
-      @required String errorMessage}) = _$_AuthState;
+      @required String errorMessage,
+      @required int authStateChanged}) = _$_AuthState;
 
   @override
   String get emailAddress;
@@ -1089,6 +1111,8 @@ abstract class _AuthState implements AuthState {
   bool get showConfirmation;
   @override
   String get errorMessage;
+  @override
+  int get authStateChanged;
   @override
   _$AuthStateCopyWith<_AuthState> get copyWith;
 }

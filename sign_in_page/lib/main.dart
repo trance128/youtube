@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sign_in_page/auth_repository.dart';
-import 'package:sign_in_page/bloc/auth_check_bloc/auth_check_bloc.dart';
+
+import 'auth_repository.dart';
+import 'bloc/auth_check_bloc/auth_bloc/auth_bloc.dart';
+import 'bloc/auth_check_bloc/auth_check_bloc.dart';
 import 'screens/home/home.dart';
 import 'screens/sign_in/sign_in_page.dart';
 import 'screens/splash/splash_screen.dart';
@@ -19,6 +21,11 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthCheckBloc(
             AuthRepository(),
           )..add(AuthEventAuthRequested()),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(
+            AuthRepository(),
+          ),
         ),
       ],
       child: MaterialApp(

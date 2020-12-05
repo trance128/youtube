@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: bg_gradient,
+        decoration: bgGradient,
         child: Column(
           children: [
             Expanded(

@@ -13,26 +13,26 @@ class State extends GetxController {
 
   RxString title = ''.obs;
 
-  RxList<SearchResult> searchResult = <SearchResult>[].obs;
+  Rx<SearchResult> searchResult = null.obs;
   Rx<MovieDetails> movieDetails = MovieDetails().obs;
 
-  void searchMovie({String title, int page = 1}) {
-    List<SearchResult> result;
+  Future<void> searchMovie({String title, int page = 1}) async {
+    SearchResult result;
 
     result = _localDataInterface.searchMovie(title, page);
 
     // if (result == null) ...
-    result ??= _remoteDataInterface.searchMovie(title, page);
+    result ??= await _remoteDataInterface.searchMovie(title, page);
 
-    searchResult.assignAll(result);
+    searchResult.value = result;
   }
 
-  void getMovieDetails({String id}) {
+  Future<void> getMovieDetails({String id}) async {
     MovieDetails details;
 
     details = _localDataInterface.getMovieDetails(id);
 
-    details ??= _remoteDataInterface.getMovieDetails(id);
+    details ??= await _remoteDataInterface.getMovieDetails(id);
 
     movieDetails.value = details;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_browser_tutorial/presentation/misc/my_colors.dart';
 
-BoxDecoration bg_gradient = BoxDecoration(
+BoxDecoration bgGradient = BoxDecoration(
   gradient: LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

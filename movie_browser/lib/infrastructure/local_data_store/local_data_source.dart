@@ -1,3 +1,4 @@
+import 'package:get/instance_manager.dart';
 import 'package:hive/hive.dart';
 
 import '../../models/movie_details.dart';
@@ -8,13 +9,10 @@ const String MOVIE_DETAILS_BOX = 'MovieDetailsBox';
 const String SEARCH_RESULT_BOX = 'SearchResultBox';
 
 class LocalDataSource implements LocalDataInterface {
-  final Box movieDetailsBox;
-  final Box searchBox;
+  final Box movieDetailsBox = Get.find<Box>(tag: MOVIE_DETAILS_BOX);
+  final Box searchBox = Get.find<Box>(tag: SEARCH_RESULT_BOX);
 
-  LocalDataSource({
-    this.movieDetailsBox,
-    this.searchBox,
-  });
+  LocalDataSource();
 
   @override
   SearchResult searchMovie(String title, int page) {

@@ -1,3 +1,4 @@
+import 'package:get/instance_manager.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -20,4 +21,7 @@ Future<void> initDb() async {
 
   final Box searchBox = await Hive.openBox(SEARCH_RESULT_BOX);
   final Box movieDetailsBox = await Hive.openBox(MOVIE_DETAILS_BOX);
+
+  Get.put<Box>(searchBox, tag: SEARCH_RESULT_BOX);
+  Get.put<Box>(movieDetailsBox, tag: MOVIE_DETAILS_BOX);
 }

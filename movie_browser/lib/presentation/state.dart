@@ -6,13 +6,11 @@ import '../models/movie_details.dart';
 import '../models/search_result.dart';
 
 class State extends GetxController {
-  final LocalDataInterface _localDataInterface;
-  final RemoteDataInterface _remoteDataInterface;
+  final LocalDataInterface _localDataInterface = Get.find<LocalDataInterface>();
+  final RemoteDataInterface _remoteDataInterface =
+      Get.find<RemoteDataInterface>();
 
-  State(
-    this._localDataInterface,
-    this._remoteDataInterface,
-  );
+  State();
 
   RxString title = ''.obs;
 

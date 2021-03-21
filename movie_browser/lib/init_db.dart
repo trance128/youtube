@@ -1,6 +1,6 @@
 import 'package:get/instance_manager.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'infrastructure/local_data_store/local_data_source.dart';
 import 'models/movie_details.dart';
@@ -9,11 +9,8 @@ import 'models/movie_summary.dart';
 import 'models/search_result.dart';
 
 Future<void> initDb() async {
-  final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
-
   Hive
-    ..init(appDocumentDirectory.path)
+    ..initFlutter()
     ..registerAdapter(MovieDetailsAdapter())
     ..registerAdapter(MovieRatingAdapter())
     ..registerAdapter(MovieSummaryAdapter())

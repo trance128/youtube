@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../infrastructure/local_data_store/local_data_interface.dart';
@@ -5,20 +6,25 @@ import '../infrastructure/remote_data_store/remote_data_interface.dart';
 import '../models/movie_details.dart';
 import '../models/search_result.dart';
 
-class State extends GetxController {
+class SearchController extends GetxController {
   final LocalDataInterface _localDataInterface = Get.find<LocalDataInterface>();
   final RemoteDataInterface _remoteDataInterface =
       Get.find<RemoteDataInterface>();
 
-  State();
-
-  RxString title = ''.obs;
+  SearchController();
 
   Rx<SearchResult> searchResult = SearchResult().obs;
   Rx<MovieDetails> movieDetails = MovieDetails().obs;
 
-  Future<void> searchMovie({String title, int page = 1}) async {
+  TextEditingController titleTextController = TextEditingController();
+
+  Future<void> searchMovie({int page = 1}) async {
+    print('searchMovie || SearchController');
     SearchResult result;
+
+    final String title = titleTextController.text;
+
+    print(title);
 
     result = _localDataInterface.searchMovie(title, page);
 
@@ -26,9 +32,14 @@ class State extends GetxController {
     result ??= await _remoteDataInterface.searchMovie(title, page);
 
     searchResult.value = result;
+
+    print('--------');
+    print('searchResult title is ${searchResult.value.title}');
+    print('searchResult totalResults is ${searchResult.value.totalResults}');
   }
 
   Future<void> getMovieDetails({String id}) async {
+    print('getMovieDetails || SearchController');
     MovieDetails details;
 
     details = _localDataInterface.getMovieDetails(id);

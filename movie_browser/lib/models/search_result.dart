@@ -53,7 +53,7 @@ class SearchResult {
       found: true,
       page: page,
       title: title,
-      totalResults: json['totalResults'] as int,
+      totalResults: int.parse(json['totalResults'] as String),
       movieSummaries: movies,
     );
   }

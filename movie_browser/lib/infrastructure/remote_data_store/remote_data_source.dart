@@ -16,6 +16,7 @@ class RemoteDataSource implements RemoteDataInterface {
 
   @override
   Future<SearchResult> searchMovie(String title, [int page = 1]) async {
+    print('searchMovie -- RemoteDataSource');
     final response = await client.get(_buildSearchURL(title, page));
 
     if (response.statusCode != 200) throw Exception('Server Error');
@@ -26,6 +27,7 @@ class RemoteDataSource implements RemoteDataInterface {
 
   @override
   Future<MovieDetails> getMovieDetails(String id) async {
+    print('getMovieDetails -- RemoteDataSource');
     final response = await client.get('$baseUrl&i=$id');
 
     if (response.statusCode != 200) throw Exception('Server Error');

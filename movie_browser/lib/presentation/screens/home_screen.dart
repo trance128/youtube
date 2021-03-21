@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 
 import '../misc/bg_gradient.dart';
 import '../misc/my_colors.dart';
+import '../search_controller.dart';
+import 'search_result_overview.dart';
 
 class HomeScreen extends StatelessWidget {
+  final SearchController _searchController = Get.find<SearchController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +37,8 @@ class HomeScreen extends StatelessWidget {
               height: 200,
               width: MediaQuery.of(context).size.width * .85,
               alignment: Alignment.center,
-              child: TextFormField(
+              child: TextField(
+                controller: _searchController.titleTextController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.search,
@@ -63,7 +70,10 @@ class HomeScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    onPressed: () => print('Navigating to search results'),
+                    onPressed: () async {
+                      await _searchController.searchMovie();
+                      Get.to(SearchResultOverView());
+                    },
                     color: myColors[PRIMARY],
                     child: Text(
                       'Search',

@@ -16,21 +16,25 @@ class LocalDataSource implements LocalDataInterface {
 
   @override
   SearchResult searchMovie(String title, int page) {
+    print('searchMovie // LocalDataSource');
     return searchBox.get('T-$title::P-$page');
   }
 
   @override
   Future<void> cacheSearchResult(SearchResult result) async {
+    print('cacheSearchResult // LocalDataSource');
     await searchBox.put('T-${result.title}::P-${result.page}', result);
   }
 
   @override
   MovieDetails getMovieDetails(String id) {
+    print('getMovieDetails // LocalDataSource');
     return movieDetailsBox.get('$id');
   }
 
   @override
   Future<void> cacheMovieDetails(MovieDetails movieDetails) async {
+    print('cacheMovieDetails // LocalDataSource');
     await movieDetailsBox.put('${movieDetails.imdbmId}', movieDetails);
   }
 }
